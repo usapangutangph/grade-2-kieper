@@ -10,6 +10,7 @@
 .wrap{max-width:920px;margin:auto;padding:16px}.hero,.card{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 28px #29597f14}.hero{padding:18px;margin-bottom:14px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}.hero h1{margin:0 0 6px;font-size:clamp(1.5rem,4vw,2.35rem)}.hero p{margin:0;color:var(--muted)}.art{display:flex;gap:8px;font-size:2.5rem}.progress{height:14px;border-radius:99px;background:#e3edf6;overflow:hidden;margin-top:12px}.bar{height:100%;width:0;background:linear-gradient(90deg,#56ccf2,var(--blue));transition:.2s}.meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:6px;color:var(--muted);font-size:.92rem}
 .card{padding:clamp(16px,4vw,28px)}.tag{display:inline-block;padding:7px 11px;border-radius:999px;background:#eef4ff;color:#315b98;font-weight:800}.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin-top:14px}.panel{border:1px solid var(--line);border-radius:18px;padding:16px;background:#fbfdff}.visual{background:#fffaf0;border-color:#f1dfad}.problem{text-align:center;font-weight:900;font-size:clamp(2.8rem,10vw,5.2rem);margin:10px 0}.stack{display:inline-grid;justify-items:end;line-height:1.08}.row{display:flex;gap:.35em}.sumline{border-top:4px solid #6f8da8;width:100%;margin-top:6px}.answer{display:block;width:min(320px,90%);margin:14px auto;padding:13px;font-size:2rem;text-align:center;border:3px solid #b8d5ee;border-radius:15px}.answer:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px #2f80ed1f}
 .actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap}.btn{border:0;border-radius:13px;padding:12px 16px;min-height:46px;font:800 1rem system-ui;cursor:pointer}.check{background:var(--blue);color:white}.hint{background:#fff1b9;color:#6b5700}.next{background:var(--green);color:white}.speak{background:#eee9ff;color:#5f49a4}.restart{background:#fff0f0;color:#9c3b3b}.btn:disabled{opacity:.45;cursor:not-allowed}.msg{margin:13px auto 0;padding:11px;border-radius:13px;text-align:center;font-weight:750;min-height:46px;background:#eef6ff;color:#2d5c8f}.msg.good{background:#e9f8ef;color:#176b37}.msg.bad{background:#fff0f0;color:#a43b3b}.hintbox{display:none;margin-top:12px;padding:12px;border:1px dashed #b8cde2;border-radius:14px;background:#f8fbff}.hintbox.show{display:block}.helperTitle{font-weight:850;margin-bottom:10px}.objects{display:flex;gap:8px;flex-wrap:wrap}.obj{background:white;border:1px solid #eadfbf;border-radius:14px;padding:9px 10px;font-weight:800}.pv{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.pv>div{background:white;border:1px solid var(--line);border-radius:13px;padding:9px;text-align:center}.pv small{display:block;color:var(--muted)}.blocks{font-size:1.25rem;line-height:1.35}.keypad{display:grid;grid-template-columns:repeat(3,64px);gap:7px;justify-content:center;margin-top:14px}.keypad button{min-height:48px;border:0;border-radius:12px;background:#f0f5fa;font-weight:850;font-size:1.2rem}.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;margin-top:16px}.tiny{color:var(--muted);font-size:.88rem}.done{text-align:center}.hidden{display:none!important}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px auto;max-width:620px}.stat{border:1px solid var(--line);border-radius:14px;padding:12px;background:#f8fbff}.stat b{font-size:1.7rem;display:block}
+.exportbar{display:flex;justify-content:space-between;align-items:center;gap:9px;flex-wrap:wrap;margin:12px 0 2px}.exportbar .left,.exportbar .right{display:flex;gap:8px;flex-wrap:wrap}.png{background:#e8f7ee;color:#176b37}.pdf{background:#ffe9e9;color:#9b3434}.prev{background:#eef4fb;color:#31506d}.capture-mode .exportbar,.capture-mode .actions,.capture-mode .keypad,.capture-mode .foot{display:none!important}.capture-mode{box-shadow:none!important}.capture-mode .panel{box-shadow:none!important}
 @media(max-width:760px){.hero{grid-template-columns:1fr}.art{justify-content:flex-start}.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr}}
 </style>
 </head>
@@ -22,6 +23,15 @@
 
 <main class="card" id="quiz">
 <div class="tag" id="tag">Practice • Problem 1</div>
+<div class="exportbar">
+  <div class="left">
+    <button class="btn prev" id="prev" type="button">← Previous</button>
+  </div>
+  <div class="right">
+    <button class="btn png" id="savePng" type="button">📸 Save This Page PNG</button>
+    <button class="btn pdf" id="savePdf" type="button">📄 Download Teacher PDF</button>
+  </div>
+</div>
 <div class="grid">
 <section class="panel">
 <div class="problem" id="problem"></div>
@@ -51,10 +61,16 @@
 <h2>🎉 Assignment Complete!</h2>
 <p>You finished all 40 problems.</p>
 <div class="stats"><div class="stat">Problems<b>40</b></div><div class="stat">Attempts<b id="attempts">0</b></div><div class="stat">First try<b id="first">0</b></div></div>
-<button class="btn restart" id="again">Start Again</button>
+<div class="actions">
+<button class="btn speak" id="review" type="button">👀 Review Pages / Save PNGs</button>
+<button class="btn pdf" id="pdfDone" type="button">📄 Download Teacher PDF</button>
+<button class="btn restart" id="again" type="button">Start Again</button>
+</div>
 </main>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <script>
 (()=>{
 const P=[
@@ -66,7 +82,7 @@ const P=[
 const KEY='kieper-grade2-addition-v1';
 let S={i:0,r:P.map(()=>({tries:0,ok:false,first:null}))};
 const $=id=>document.getElementById(id);
-const el={quiz:$('quiz'),done:$('done'),problem:$('problem'),answer:$('answer'),check:$('check'),hint:$('hint'),hintbox:$('hintbox'),next:$('next'),msg:$('msg'),bar:$('bar'),prog:$('prog'),score:$('score'),tag:$('tag'),objects:$('objects'),pv:$('pv')};
+const el={quiz:$('quiz'),done:$('done'),problem:$('problem'),answer:$('answer'),check:$('check'),hint:$('hint'),hintbox:$('hintbox'),next:$('next'),msg:$('msg'),bar:$('bar'),prog:$('prog'),score:$('score'),tag:$('tag'),objects:$('objects'),pv:$('pv'),prev:$('prev'),savePng:$('savePng'),savePdf:$('savePdf')};
 try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.r?.length===40)S=s}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 const count=()=>S.r.filter(x=>x.ok).length;
@@ -79,13 +95,14 @@ function helper(nums){
  el.pv.innerHTML=names.map((name,pos)=>{const d=digits(nums,pos),sum=d.reduce((a,b)=>a+b,0);return '<div><small>'+name+'</small><div class="blocks">'+d.join(' + ')+'</div><b>'+sum+'</b></div>'}).join('');
 }
 function render(){
- if(count()===40)return finish();
  const p=P[S.i],r=S.r[S.i];
  el.problem.innerHTML=stack(p.n);
- el.tag.textContent='Practice • Problem '+(S.i+1);
+ el.tag.textContent='Kieper • Practice • Problem '+(S.i+1)+' of 40';
  helper(p.n);
- el.answer.value='';el.answer.disabled=r.ok;el.check.disabled=r.ok;el.next.disabled=!r.ok;
- el.hintbox.classList.remove('show');el.msg.className='msg';el.msg.textContent=r.ok?'Great! Press Next.':'Take your time. Start with the ones place.';
+ el.answer.value=r.ok?String(p.a):'';el.answer.disabled=r.ok;el.check.disabled=r.ok;el.next.disabled=!r.ok;
+ el.prev.disabled=S.i===0;
+ el.savePng.disabled=!r.ok;
+ el.hintbox.classList.remove('show');el.msg.className=r.ok?'msg good':'msg';el.msg.textContent=r.ok?'Correct! This page is complete and ready to save as PNG.':'Take your time. Start with the ones place.';
  el.prog.textContent='Problem '+(S.i+1)+' of 40';el.score.textContent=count()+' correct';el.bar.style.width=(count()/40*100)+'%';
  if(!r.ok)setTimeout(()=>el.answer.focus(),30);
 }
@@ -100,15 +117,83 @@ function hint(){
  for(let pos=0;pos<3;pos++){const d=digits(nums,pos),sum=d.reduce((a,b)=>a+b,0)+carry;html+='<p><b>'+names[pos][0].toUpperCase()+names[pos].slice(1)+':</b> '+d.join(' + ')+(carry?' + carry '+carry:'')+' = '+sum+'. '+(sum>=10?'Regroup '+Math.floor(sum/10)+' to the next column.':'No regrouping needed.')+'</p>';carry=Math.floor(sum/10)}
  el.hintbox.innerHTML=html;el.hintbox.classList.toggle('show');
 }
-function next(){if(!S.r[S.i].ok)return;let n=S.i+1;while(n<40&&S.r[n].ok)n++;if(n>=40)return finish();S.i=n;save();render()}
+function next(){if(!S.r[S.i].ok)return;if(S.i>=39)return finish();S.i++;save();render()}
+function prev(){if(S.i<=0)return;S.i--;save();render()}
+async function savePng(){
+  const r=S.r[S.i];
+  if(!r.ok){el.msg.className='msg bad';el.msg.textContent='Finish this problem correctly before saving the PNG.';return;}
+  if(typeof html2canvas!=='function'){el.msg.className='msg bad';el.msg.textContent='Screenshot tool did not load. Refresh the page and try again.';return;}
+  const oldText=el.msg.textContent;
+  el.msg.className='msg good';el.msg.textContent='Creating PNG…';
+  el.quiz.classList.add('capture-mode');
+  try{
+    const canvas=await html2canvas(el.quiz,{backgroundColor:'#ffffff',scale:2,useCORS:true,logging:false});
+    const link=document.createElement('a');
+    link.download='Kieper_Grade2_Addition_Problem_'+String(S.i+1).padStart(2,'0')+'.png';
+    link.href=canvas.toDataURL('image/png');
+    link.click();
+    el.msg.textContent='PNG saved for Problem '+(S.i+1)+'.';
+  }catch(e){
+    el.msg.className='msg bad';el.msg.textContent='Could not create the PNG. Please refresh and try again.';
+  }finally{
+    el.quiz.classList.remove('capture-mode');
+    setTimeout(()=>{if(S.r[S.i].ok){el.msg.className='msg good';el.msg.textContent='Correct! This page is complete and ready to save as PNG.';}},1600);
+  }
+}
+function savePdf(){
+  if(!window.jspdf||!window.jspdf.jsPDF){
+    alert('PDF tool did not load. Refresh the page and try again.');
+    return;
+  }
+  const {jsPDF}=window.jspdf;
+  const pdf=new jsPDF({orientation:'portrait',unit:'pt',format:'letter'});
+  P.forEach((p,i)=>{
+    if(i>0)pdf.addPage();
+    const r=S.r[i];
+    const w=612,h=792;
+    pdf.setFillColor(247,251,255);pdf.rect(0,0,w,h,'F');
+    pdf.setFillColor(255,255,255);pdf.roundedRect(38,42,w-76,h-84,18,18,'F');
+    pdf.setDrawColor(219,232,243);pdf.roundedRect(38,42,w-76,h-84,18,18,'S');
+    pdf.setTextColor(23,50,77);pdf.setFont('helvetica','bold');pdf.setFontSize(22);
+    pdf.text("Kieper's Grade 2 Addition Assignment",56,82);
+    pdf.setFont('helvetica','normal');pdf.setFontSize(11);pdf.setTextColor(96,121,143);
+    pdf.text('Problem '+(i+1)+' of 40',56,104);
+    pdf.setDrawColor(219,232,243);pdf.line(56,119,w-56,119);
+    pdf.setTextColor(23,50,77);pdf.setFont('helvetica','bold');pdf.setFontSize(38);
+    const expr=p.n.join(' + ');
+    pdf.text(expr, w/2, 230, {align:'center'});
+    pdf.setFontSize(18);pdf.setFont('helvetica','normal');
+    pdf.text('Answer:',130,320);
+    if(r.ok){
+      pdf.setFont('helvetica','bold');pdf.setFontSize(30);pdf.setTextColor(39,174,96);
+      pdf.text(String(p.a),230,320);
+      pdf.setFontSize(14);pdf.text('✓ Correct',230,350);
+    }else{
+      pdf.setDrawColor(120,145,166);pdf.line(230,325,390,325);
+      pdf.setFontSize(12);pdf.setTextColor(160,80,80);pdf.text('Not completed yet',230,350);
+    }
+    pdf.setTextColor(96,121,143);pdf.setFont('helvetica','normal');pdf.setFontSize(12);
+    pdf.text('Attempts: '+(r.tries||0),56,410);
+    pdf.text(r.ok?'Completed':'Incomplete',56,430);
+    pdf.setFillColor(238,246,255);pdf.roundedRect(56,480,w-112,108,14,14,'F');
+    pdf.setTextColor(49,91,152);pdf.setFont('helvetica','bold');pdf.setFontSize(15);
+    pdf.text('Place-value reminder',76,514);
+    pdf.setFont('helvetica','normal');pdf.setFontSize(12);pdf.setTextColor(55,82,106);
+    pdf.text('Add the ones first, then the tens, then the hundreds.',76,540);
+    pdf.setFontSize(10);pdf.setTextColor(110,130,148);
+    pdf.text('Generated from the interactive assignment website.',56,h-62);
+  });
+  pdf.save('Kieper_Grade2_Addition_Assignment.pdf');
+}
+function review(){el.done.classList.add('hidden');el.quiz.classList.remove('hidden');S.i=0;save();render()}
 function speak(){const t='Solve '+P[S.i].n.join(' plus ')+'. What is the answer?';if('speechSynthesis'in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.rate=.92;speechSynthesis.speak(u)}else alert(t)}
 function reset(){if(!confirm('Restart the whole assignment and erase progress?'))return;S={i:0,r:P.map(()=>({tries:0,ok:false,first:null}))};save();el.done.classList.add('hidden');el.quiz.classList.remove('hidden');render()}
 function finish(){el.quiz.classList.add('hidden');el.done.classList.remove('hidden');$('attempts').textContent=S.r.reduce((a,x)=>a+x.tries,0);$('first').textContent=S.r.filter(x=>x.first).length;el.bar.style.width='100%';el.prog.textContent='40 of 40 complete';el.score.textContent='40 correct'}
-el.check.addEventListener('click',check);el.answer.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();check()}});el.hint.addEventListener('click',hint);el.next.addEventListener('click',next);$('speak').addEventListener('click',speak);$('restart').addEventListener('click',reset);$('again').addEventListener('click',reset);
+el.check.addEventListener('click',check);el.answer.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();check()}});el.hint.addEventListener('click',hint);el.next.addEventListener('click',next);el.prev.addEventListener('click',prev);el.savePng.addEventListener('click',savePng);el.savePdf.addEventListener('click',savePdf);$('speak').addEventListener('click',speak);$('restart').addEventListener('click',reset);$('again').addEventListener('click',reset);$('review').addEventListener('click',review);$('pdfDone').addEventListener('click',savePdf);
 $('keypad').innerHTML=['1','2','3','4','5','6','7','8','9','Clear','0','⌫'].map(k=>'<button type="button" data-k="'+k+'">'+k+'</button>').join('');
 $('keypad').addEventListener('click',e=>{const b=e.target.closest('button');if(!b||el.answer.disabled)return;const k=b.dataset.k;if(k==='Clear')el.answer.value='';else if(k==='⌫')el.answer.value=el.answer.value.slice(0,-1);else if(el.answer.value.length<6)el.answer.value+=k;el.answer.focus()});
 el.answer.addEventListener('input',()=>el.answer.value=el.answer.value.replace(/\D/g,'').slice(0,6));
-render();
+if(count()===40)finish();else render();
 })();
 </script>
 </body>
